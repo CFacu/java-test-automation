@@ -31,6 +31,13 @@ public class MainHospital {
         pediatrician.setAge(30);
         hospital.addDoctor(pediatrician);
 
+        Doctor pathologist = new Doctor();
+        pathologist.setName("Joe");
+        pathologist.setLastName("Johnson");
+        pathologist.setSpeciality(Speciality.PATHOLOGY);
+        pathologist.setAge(35);
+        hospital.addDoctor(pathologist);
+
         Doctor surgeon = new Doctor();
         surgeon.setName("Stephen");
         surgeon.setLastName("Strange");
@@ -48,6 +55,6 @@ public class MainHospital {
             LOGGER.error(a);
         }
 
-        System.out.println(hospital.searchDoctor("Facundo"));
+        System.out.println(hospital.searchDoctor("Joe"));
     }
 }

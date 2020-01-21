@@ -97,9 +97,6 @@ public abstract class AbstractHospital {
             throw new NameNullException("You must enter a name.");
         } else {
 
-            /*if (this.doctors.stream().noneMatch(doc -> name.equals(doc.getName()))) throw new NameNotFoundException("The doctor is not in our database");
-            else return this.doctors.stream().sorted().filter(doc -> name.equals(doc.getName()));*/
-
             for (Doctor doctor : this.doctors) {
                 if (!doctor.getName().equals(name)) {
                     throw new NameNotFoundException("The doctor is not in our database");

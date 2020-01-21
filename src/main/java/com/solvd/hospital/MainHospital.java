@@ -6,12 +6,16 @@ import com.solvd.hospital.hospitals.Clinic;
 import com.solvd.hospital.hospitals.Hospital;
 import com.solvd.hospital.people.employee.medical.Doctor;
 import com.solvd.hospital.people.employee.medical.Speciality;
+import org.apache.log4j.Logger;
 
 import java.util.Scanner;
 
 public class MainHospital {
 
+    final static Logger LOGGER = Logger.getLogger(MainHospital.class);
+
     public static void main(String[] args) throws NameNullException, NameNotFoundException {
+
         Scanner scan = new Scanner(System.in);
 
         Hospital hospital = new Hospital();
@@ -34,36 +38,16 @@ public class MainHospital {
         surgeon.setAge(45);
         clinic.addDoctor(surgeon);
 
-        /*System.out.println("Doctors: " + hospital.getDoctors());
-
-        Patient patient = new Patient();
-        patient.setName("John");
-        patient.setLastName("Doe");
-        patient.setAge(11);
-        patient.setDisease(Disease.DIABETES_TYPE_1);
-
-        Patient patientTwo = new Patient();
-        patientTwo.setName("Peter");
-        patientTwo.setLastName("Parker");
-        patientTwo.setAge(11);
-        patientTwo.setDisease(Disease.CANCER);
-
-        hospital.addPatient(patientTwo);
-        hospital.assignPatient(pediatrician,patientTwo);
-
-        System.out.println(hospital.getPatients());
-
-        pediatrician.healPatient(patientTwo);
+        System.out.println("Doctors: " + hospital.getDoctors());
 
         try {
             hospital.searchDoctor(scan.next());
         } catch (NameNullException e) {
-            e.printStackTrace();
+            LOGGER.error(e);
         } catch (NameNotFoundException a) {
-            a.printStackTrace();
-        }*/
+            LOGGER.error(a);
+        }
 
         System.out.println(hospital.searchDoctor("Facundo"));
-
     }
 }

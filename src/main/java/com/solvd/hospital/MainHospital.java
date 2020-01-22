@@ -47,14 +47,6 @@ public class MainHospital {
 
         System.out.println("Doctors: " + hospital.getDoctors());
 
-        try {
-            hospital.searchDoctor(scan.next());
-        } catch (NameNullException e) {
-            LOGGER.error(e);
-        } catch (NameNotFoundException a) {
-            LOGGER.error(a);
-        }
-
         System.out.println(hospital.searchDoctor("Joe"));
     }
 }

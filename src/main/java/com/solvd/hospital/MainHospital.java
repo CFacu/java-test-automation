@@ -6,17 +6,10 @@ import com.solvd.hospital.hospitals.Clinic;
 import com.solvd.hospital.hospitals.Hospital;
 import com.solvd.hospital.people.employee.medical.Doctor;
 import com.solvd.hospital.people.employee.medical.Speciality;
-import org.apache.log4j.Logger;
-
-import java.util.Scanner;
 
 public class MainHospital {
 
-    final static Logger LOGGER = Logger.getLogger(MainHospital.class);
-
     public static void main(String[] args) throws NameNullException, NameNotFoundException {
-
-        Scanner scan = new Scanner(System.in);
 
         Hospital hospital = new Hospital();
         hospital.setHospitalName("4 of June");
@@ -45,7 +38,7 @@ public class MainHospital {
         surgeon.setAge(45);
         clinic.addDoctor(surgeon);
 
-        System.out.println("Doctors: " + hospital.getDoctors());
+        //System.out.println("Doctors: " + hospital.getDoctors());
 
         System.out.println(hospital.searchDoctor("Joe"));
     }

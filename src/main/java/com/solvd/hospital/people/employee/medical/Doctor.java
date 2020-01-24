@@ -82,4 +82,6 @@ public class Doctor extends Person implements IHeal{
         } else LOGGER.warn("Only a surgeon can do surgery.");
     }
 
+
+
 }

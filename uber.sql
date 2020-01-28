@@ -8,20 +8,20 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Schema uber
 -- -----------------------------------------------------
-DROP SCHEMA IF EXISTS `mydb` ;
+DROP SCHEMA IF EXISTS `uber` ;
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Schema uber
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
-USE `mydb` ;
+CREATE SCHEMA IF NOT EXISTS `uber` DEFAULT CHARACTER SET utf8 ;
+USE `uber` ;
 
 -- -----------------------------------------------------
--- Table `mydb`.`Drivers`
+-- Table `uber`.`Drivers`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Drivers` (
+CREATE TABLE IF NOT EXISTS `uber`.`Drivers` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
   `birth_date` DATE NOT NULL,
@@ -33,9 +33,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Licenses`
+-- Table `uber`.`Licenses`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Licenses` (
+CREATE TABLE IF NOT EXISTS `uber`.`Licenses` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `number` INT UNSIGNED NOT NULL,
   `exp_date` DATE NOT NULL,
@@ -44,16 +44,16 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Licenses` (
   INDEX `fk_Licenses_Drivers_idx` (`drivers_id` ASC) VISIBLE,
   CONSTRAINT `fk_Licenses_Drivers`
     FOREIGN KEY (`drivers_id`)
-    REFERENCES `mydb`.`Drivers` (`id`)
+    REFERENCES `uber`.`Drivers` (`id`)
     ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Cars`
+-- Table `uber`.`Cars`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Cars` (
+CREATE TABLE IF NOT EXISTS `uber`.`Cars` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `model` VARCHAR(45) NOT NULL,
   `color` VARCHAR(45) NOT NULL,
@@ -64,16 +64,16 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Cars` (
   INDEX `fk_Cars_Drivers1_idx` (`drivers_id` ASC) VISIBLE,
   CONSTRAINT `fk_Cars_Drivers1`
     FOREIGN KEY (`drivers_id`)
-    REFERENCES `mydb`.`Drivers` (`id`)
+    REFERENCES `uber`.`Drivers` (`id`)
     ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Users`
+-- Table `uber`.`Users`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Users` (
+CREATE TABLE IF NOT EXISTS `uber`.`Users` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
   `age` INT UNSIGNED NOT NULL,
@@ -86,9 +86,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Rides`
+-- Table `uber`.`Rides`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Rides` (
+CREATE TABLE IF NOT EXISTS `uber`.`Rides` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `distance` INT NOT NULL,
   `pick_up_time` DATETIME NOT NULL,
@@ -99,16 +99,16 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Rides` (
   INDEX `fk_Trips_Drivers1_idx` (`drivers_id` ASC) VISIBLE,
   CONSTRAINT `fk_Trips_Drivers1`
     FOREIGN KEY (`drivers_id`)
-    REFERENCES `mydb`.`Drivers` (`id`)
+    REFERENCES `uber`.`Drivers` (`id`)
     ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Services`
+-- Table `uber`.`Services`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Services` (
+CREATE TABLE IF NOT EXISTS `uber`.`Services` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
   `serial_number` INT UNSIGNED NOT NULL,
@@ -117,9 +117,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Services_Cars`
+-- Table `uber`.`Services_Cars`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Services_Cars` (
+CREATE TABLE IF NOT EXISTS `uber`.`Services_Cars` (
   `Services_id` INT UNSIGNED NOT NULL,
   `cars_id` INT UNSIGNED NOT NULL,
   `cars_drivers_id` INT UNSIGNED NOT NULL,
@@ -130,21 +130,21 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Services_Cars` (
   INDEX `fk_Services_has_Cars_Services1_idx` (`Services_id` ASC) VISIBLE,
   CONSTRAINT `fk_Services_has_Cars_Services1`
     FOREIGN KEY (`Services_id`)
-    REFERENCES `mydb`.`Services` (`id`)
+    REFERENCES `uber`.`Services` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Services_has_Cars_Cars1`
     FOREIGN KEY (`cars_id` , `cars_drivers_id`)
-    REFERENCES `mydb`.`Cars` (`id` , `drivers_id`)
+    REFERENCES `uber`.`Cars` (`id` , `drivers_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Credit_Cards`
+-- Table `uber`.`Credit_Cards`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Credit_Cards` (
+CREATE TABLE IF NOT EXISTS `uber`.`Credit_Cards` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `number` INT NOT NULL,
   `exp_date` DATE NOT NULL,
@@ -153,16 +153,16 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Credit_Cards` (
   INDEX `fk_Credit_Cards_Users1_idx` (`users_id` ASC) VISIBLE,
   CONSTRAINT `fk_Credit_Cards_Users1`
     FOREIGN KEY (`users_id`)
-    REFERENCES `mydb`.`Users` (`id`)
+    REFERENCES `uber`.`Users` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Rides_Requests`
+-- Table `uber`.`Rides_Requests`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Rides_Requests` (
+CREATE TABLE IF NOT EXISTS `uber`.`Rides_Requests` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `date_time` DATETIME NOT NULL,
   `location_start` VARCHAR(45) NOT NULL,
@@ -175,12 +175,12 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Rides_Requests` (
   INDEX `fk_Ride_Request_Ride1_idx` (`rides_id` ASC, `rides_drivers_id` ASC) VISIBLE,
   CONSTRAINT `fk_Ride_Request_Users1`
     FOREIGN KEY (`users_id`)
-    REFERENCES `mydb`.`Users` (`id`)
+    REFERENCES `uber`.`Users` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Ride_Request_Ride1`
     FOREIGN KEY (`rides_id` , `rides_drivers_id`)
-    REFERENCES `mydb`.`Rides` (`id` , `drivers_id`)
+    REFERENCES `uber`.`Rides` (`id` , `drivers_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -191,66 +191,55 @@ SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 -- -----------------------------------------------------
--- Data for table `mydb`.`Drivers`
+-- Data for table `uber`.`Drivers`
 -- -----------------------------------------------------
 START TRANSACTION;
-USE `mydb`;
-INSERT INTO `mydb`.`Drivers` (`id`, `name`, `birth_date`, `password`, `phone_number`, `rate`) VALUES (1, 'Facundo', '13/03/1998', 'asd123', 123456, 5);
-INSERT INTO `mydb`.`Drivers` (`id`, `name`, `birth_date`, `password`, `phone_number`, `rate`) VALUES (2, 'Joe', '16/01/1989', '456dsa', 654897, 4);
-INSERT INTO `mydb`.`Drivers` (`id`, `name`, `birth_date`, `password`, `phone_number`, `rate`) VALUES (3, 'Denis', '10/07/1978', '789fgb', 456123, 2);
-INSERT INTO `mydb`.`Drivers` (`id`, `name`, `birth_date`, `password`, `phone_number`, `rate`) VALUES (4, 'Emma', '23/02/1994', 'qwe852', 987654, 5);
-INSERT INTO `mydb`.`Drivers` (`id`, `name`, `birth_date`, `password`, `phone_number`, `rate`) VALUES (5, 'Charlotte', '02/05/1993', 'fgh741', 741963, 4);
+USE `uber`;
+INSERT INTO `uber`.`Drivers` (`id`, `name`, `birth_date`, `password`, `phone_number`, `rate`) VALUES (1, 'Facundo', '1998-03-13', 'asd123', 123456, 5);
+INSERT INTO `uber`.`Drivers` (`id`, `name`, `birth_date`, `password`, `phone_number`, `rate`) VALUES (2, 'Joe', '1989-01-13', '456dsa', 654897, 4);
+INSERT INTO `uber`.`Drivers` (`id`, `name`, `birth_date`, `password`, `phone_number`, `rate`) VALUES (3, 'Denis', '1978-07-10', '789fgb', 456123, 2);
+INSERT INTO `uber`.`Drivers` (`id`, `name`, `birth_date`, `password`, `phone_number`, `rate`) VALUES (4, 'Emma', '1994-02-23', 'qwe852', 987654, 5);
+INSERT INTO `uber`.`Drivers` (`id`, `name`, `birth_date`, `password`, `phone_number`, `rate`) VALUES (5, 'Charlotte', '1993-05-02', 'fgh741', 741963, 4);
 
 COMMIT;
 
 
 -- -----------------------------------------------------
--- Data for table `mydb`.`Licenses`
+-- Data for table `uber`.`Licenses`
 -- -----------------------------------------------------
 START TRANSACTION;
-USE `mydb`;
-INSERT INTO `mydb`.`Licenses` (`id`, `number`, `exp_date`, `drivers_id`) VALUES (1, 6516516, '05/2023', 1);
-INSERT INTO `mydb`.`Licenses` (`id`, `number`, `exp_date`, `drivers_id`) VALUES (2, 4984562, '08/2027', 4);
-INSERT INTO `mydb`.`Licenses` (`id`, `number`, `exp_date`, `drivers_id`) VALUES (3, 6516949, '08/2027', 3);
-INSERT INTO `mydb`.`Licenses` (`id`, `number`, `exp_date`, `drivers_id`) VALUES (4, 3166489, '05/2023', 2);
+USE `uber`;
+INSERT INTO `uber`.`Licenses` (`id`, `number`, `exp_date`, `drivers_id`) VALUES (1, 6516516, '2023-05-10', 1);
+INSERT INTO `uber`.`Licenses` (`id`, `number`, `exp_date`, `drivers_id`) VALUES (2, 4984562, '2027-08-10', 4);
+INSERT INTO `uber`.`Licenses` (`id`, `number`, `exp_date`, `drivers_id`) VALUES (3, 6516949, '2027-08-10', 3);
+INSERT INTO `uber`.`Licenses` (`id`, `number`, `exp_date`, `drivers_id`) VALUES (4, 3166489, '2023-05-10', 2);
 
 COMMIT;
 
 
 -- -----------------------------------------------------
--- Data for table `mydb`.`Cars`
+-- Data for table `uber`.`Cars`
 -- -----------------------------------------------------
 START TRANSACTION;
-USE `mydb`;
-INSERT INTO `mydb`.`Cars` (`id`, `model`, `color`, `make`, `model_year`, `drivers_id`) VALUES (1, 'Corsa', 'White', 'Chevrolet', 2011, 2);
-INSERT INTO `mydb`.`Cars` (`id`, `model`, `color`, `make`, `model_year`, `drivers_id`) VALUES (2, 'M3', 'Blue', 'BMW', 2015, 1);
-INSERT INTO `mydb`.`Cars` (`id`, `model`, `color`, `make`, `model_year`, `drivers_id`) VALUES (3, 'Corolla', 'Black', 'Chevrolet', 2017, 2);
-INSERT INTO `mydb`.`Cars` (`id`, `model`, `color`, `make`, `model_year`, `drivers_id`) VALUES (4, '208', 'White', 'Peugeot', 2015, 3);
-INSERT INTO `mydb`.`Cars` (`id`, `model`, `color`, `make`, `model_year`, `drivers_id`) VALUES (5, 'Fiesta', 'Red', 'Ford', 2010, 4);
+USE `uber`;
+INSERT INTO `uber`.`Cars` (`id`, `model`, `color`, `make`, `model_year`, `drivers_id`) VALUES (1, 'Corsa', 'White', 'Chevrolet', 2011, 2);
+INSERT INTO `uber`.`Cars` (`id`, `model`, `color`, `make`, `model_year`, `drivers_id`) VALUES (2, 'M3', 'Blue', 'BMW', 2015, 1);
+INSERT INTO `uber`.`Cars` (`id`, `model`, `color`, `make`, `model_year`, `drivers_id`) VALUES (3, 'Corolla', 'Black', 'Chevrolet', 2017, 2);
+INSERT INTO `uber`.`Cars` (`id`, `model`, `color`, `make`, `model_year`, `drivers_id`) VALUES (4, '208', 'White', 'Peugeot', 2015, 3);
+INSERT INTO `uber`.`Cars` (`id`, `model`, `color`, `make`, `model_year`, `drivers_id`) VALUES (5, 'Fiesta', 'Red', 'Ford', 2010, 4);
 
 COMMIT;
 
 
 -- -----------------------------------------------------
--- Data for table `mydb`.`Users`
+-- Data for table `uber`.`Users`
 -- -----------------------------------------------------
 START TRANSACTION;
-USE `mydb`;
-INSERT INTO `mydb`.`Users` (`id`, `name`, `age`, `rate`, `password`, `phone_number`, `location`) VALUES (1, 'James', 17, 5, '78945qwe', 4654598, 'New York');
-INSERT INTO `mydb`.`Users` (`id`, `name`, `age`, `rate`, `password`, `phone_number`, `location`) VALUES (2, 'Lucas', 20, 3, '8879vdvfd', 5845631, 'Las Vegas');
-INSERT INTO `mydb`.`Users` (`id`, `name`, `age`, `rate`, `password`, `phone_number`, `location`) VALUES (3, 'William', 35, 5, 'q12wd56qw', 2315456, 'Los Angeles');
-INSERT INTO `mydb`.`Users` (`id`, `name`, `age`, `rate`, `password`, `phone_number`, `location`) VALUES (4, 'Benjamin', 50, 4, 'g5g6dfg41', 2315647, 'Los Angeles');
-INSERT INTO `mydb`.`Users` (`id`, `name`, `age`, `rate`, `password`, `phone_number`, `location`) VALUES (5, 'Judith', 26, 4, 'q13ew213', 8945621, 'Los Angeles');
+USE `uber`;
+INSERT INTO `uber`.`Users` (`id`, `name`, `age`, `rate`, `password`, `phone_number`, `location`) VALUES (1, 'James', 17, 5, '78945qwe', 4654598, 'New York');
+INSERT INTO `uber`.`Users` (`id`, `name`, `age`, `rate`, `password`, `phone_number`, `location`) VALUES (2, 'Lucas', 20, 3, '8879vdvfd', 5845631, 'Las Vegas');
+INSERT INTO `uber`.`Users` (`id`, `name`, `age`, `rate`, `password`, `phone_number`, `location`) VALUES (3, 'William', 35, 5, 'q12wd56qw', 2315456, 'Los Angeles');
+INSERT INTO `uber`.`Users` (`id`, `name`, `age`, `rate`, `password`, `phone_number`, `location`) VALUES (4, 'Benjamin', 50, 4, 'g5g6dfg41', 2315647, 'Los Angeles');
+INSERT INTO `uber`.`Users` (`id`, `name`, `age`, `rate`, `password`, `phone_number`, `location`) VALUES (5, 'Judith', 26, 4, 'q13ew213', 8945621, 'Los Angeles');
 
 COMMIT;
-
-UPDATE `Users` SET `name` = "Roger" WHERE `name` = "Lucas";
-UPDATE `Users` SET `name` = "Robin" WHERE `name` = "William";
-UPDATE `Users` SET `rate` = 4 WHERE `name` = "Roger";
-UPDATE `Users` SET `age` = 25 WHERE `name` = "Judith";
-UPDATE `Drivers` SET `rate` = 2 WHERE `name` = "Joe";
-UPDATE `Drivers` SET `rate` = 2 WHERE `name` = "Emma";
-UPDATE `Drivers` SET `rate` = 2 WHERE `name` = "Denis";
-UPDATE `Cars` SET `model_year` = 2014 WHERE `model` = "Corolla";
-UPDATE `Cars` SET `model_year` = 2015 WHERE `name` = "Fiesta";
-UPDATE `Users` SET `location` = "New York" WHERE  `name` = "Judith";

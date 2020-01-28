@@ -1,18 +1,11 @@
 package com.solvd.hospital.hospitals;
 
 import com.solvd.hospital.exceptions.NameNotFoundException;
-import com.solvd.hospital.exceptions.NameNullException;
 import com.solvd.hospital.people.employee.medical.Nurse;
 import com.solvd.hospital.people.employee.medical.Doctor;
 import com.solvd.hospital.people.Patient;
-
-import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.List;
-import java.util.Scanner;
-
 import org.apache.log4j.Logger;
-
+import java.util.*;
 
 public abstract class AbstractHospital {
 
@@ -92,22 +85,8 @@ public abstract class AbstractHospital {
         return this.getHospitalName();
     }
 
-    public Doctor searchDoctor (String name) throws NameNullException, NameNotFoundException {
-        if (name.equals("")) {
-            throw new NameNullException("You must enter a name.");
-        } else {
-
-            /*if (this.doctors.stream().noneMatch(doc -> name.equals(doc.getName()))) throw new NameNotFoundException("The doctor is not in our database");
-            else return this.doctors.stream().sorted().filter(doc -> name.equals(doc.getName()));*/
-
-            for (Doctor doctor : this.doctors) {
-                if (!doctor.getName().equals(name)) {
-                    throw new NameNotFoundException("The doctor is not in our database");
-                }else {
-                    return doctor;
-                }
-            }
-        }
-        return null;
+    public Optional<Doctor> searchDoctor (String name) throws NameNotFoundException {
+        if (this.doctors.stream().noneMatch(doc -> doc.getName().equals(name))) throw new NameNotFoundException("The doctor is not in our database");
+        else return (this.doctors.stream().filter(doc -> doc.getName().equals(name)).findAny());
     }
 }

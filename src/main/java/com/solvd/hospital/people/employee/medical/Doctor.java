@@ -2,12 +2,12 @@ package com.solvd.hospital.people.employee.medical;
 
 import com.solvd.hospital.people.Patient;
 import com.solvd.hospital.people.Person;
-
+import org.apache.log4j.Logger;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Doctor extends Person implements IHeal{
-
+    final static Logger LOGGER = Logger.getLogger(Doctor.class);
     private Speciality speciality;
     private long npi; //National Provider Identifier(10 digit identification number for medics)
     private List<Patient> patients = new ArrayList<>();
@@ -68,8 +68,8 @@ public class Doctor extends Person implements IHeal{
             if (DISEASES.containsKey(patient.getDisease())) {
                 System.out.println("How to heal the patient: " + DISEASES.get(patient.getDisease()));
             }
-            else System.out.println("Sorry, the disease is not in our database.");
-        else System.out.println("This patient does not belong to this doctor.");
+            else LOGGER.warn("Sorry, the disease is not in our database.");
+        else LOGGER.warn("This patient does not belong to this doctor.");
     }
 
     public void addToBankAccount(Float amount) {
@@ -79,7 +79,9 @@ public class Doctor extends Person implements IHeal{
     public void surgery (Patient patient) {
         if (this.speciality.equals(Speciality.SURGERY)) {
             System.out.println("Doing surgery to: " + patient);
-        } else System.out.println("Only a surgeon can do surgery.");
+        } else LOGGER.warn("Only a surgeon can do surgery.");
     }
+
+
 
 }

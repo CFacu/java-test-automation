@@ -5,11 +5,12 @@ import com.solvd.hospital.people.employee.administrative.IPay;
 import com.solvd.hospital.people.employee.medical.Nurse;
 import com.solvd.hospital.people.employee.medical.Doctor;
 import com.solvd.hospital.people.Patient;
-
+import org.apache.log4j.Logger;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Clinic extends AbstractHospital implements IPay {
+    final static Logger LOGGER = Logger.getLogger(Clinic.class);
 
     private Float nursesHours;
     private Float budget;
@@ -48,15 +49,15 @@ public class Clinic extends AbstractHospital implements IPay {
         if (this.getDoctors().contains(doctor))
             if (this.getPatients().contains(patient))
                 doctor.addPatients(patient);
-            else System.out.println("This patient does not belong to this clinic.");
-        else System.out.println("This doctor does not belong to this clinic.");
+            else LOGGER.warn("This patient does not belong to this clinic.");
+        else LOGGER.warn("This doctor does not belong to this clinic.");
     }
 
     @Override
     public void giveMedicine(Patient patient) {
         if (this.getPatients().contains(patient))
-            System.out.println("Medicine given to: " + patient);
-        else System.out.println("This patient does not belong to this clinic.");
+            LOGGER.warn("Medicine given to: " + patient);
+        else LOGGER.warn("This patient does not belong to this clinic.");
     }
 
     public void pay(Doctor doctor, Accountant accountant) {
@@ -64,8 +65,8 @@ public class Clinic extends AbstractHospital implements IPay {
             if (this.getAccountants().contains(accountant)) {
                 doctor.addToBankAccount(doctor.getSpeciality().getSalary());
                 this.setBudget(this.getBudget() - doctor.getSpeciality().getSalary());
-            } else System.out.println("This accountant does not belong to this clinic.");
-        } else System.out.println("This doctor does not belong to this clinic.");
+            } else LOGGER.warn("This accountant does not belong to this clinic.");
+        } else LOGGER.warn("This doctor does not belong to this clinic.");
 
     }
 
@@ -74,8 +75,8 @@ public class Clinic extends AbstractHospital implements IPay {
             if (this.getAccountants().contains(accountant)) {
                 nurse.addToBankAccount(nurse.getSalary() * nurse.getHoursWorked());
                 this.setBudget(this.getBudget() - nurse.getSalary() * nurse.getHoursWorked());
-            } else System.out.println("This accountant does not belong to this clinic.");
-        } else System.out.println("This doctor does not belong to this clinic.");
+            } else LOGGER.warn("This accountant does not belong to this clinic.");
+        } else LOGGER.warn("This doctor does not belong to this clinic.");
 
     }
 }

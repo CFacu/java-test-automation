@@ -1,9 +1,11 @@
 package com.solvd.pages;
 
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class LoginPage extends AbstractPage {
+
     @FindBy(id = "txtUsername")
     private WebElement usernameInput;
 
@@ -13,8 +15,8 @@ public class LoginPage extends AbstractPage {
     @FindBy(id = "btnLogin")
     private WebElement loginButton;
 
-    public LoginPage() {
-
+    public LoginPage(WebDriver driver) {
+        super(driver);
     }
 
     public void login(String username, String password) {

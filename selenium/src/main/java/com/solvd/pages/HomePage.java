@@ -1,7 +1,10 @@
 package com.solvd.pages;
 
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class HomePage extends AbstractPage{
     @FindBy(id = "menu_admin_viewAdminModule")
@@ -19,11 +22,13 @@ public class HomePage extends AbstractPage{
     @FindBy(id = "menu_pim_viewPimModule")
     private WebElement pimHyperLink;
 
-    /*@FindBy(linkText = "Logout")
-    private WebElement logoutBtn;*/
+    @FindBy(xpath = "//*[@id='welcome-menu']/ul/li[2]/a")
+    private WebElement logoutHyperLink;
 
-    public HomePage(){
+    public HomePage(){}
 
+    public HomePage(WebDriver driver) {
+        super(driver);
     }
 
     public void clickAdmin() {
@@ -46,8 +51,18 @@ public class HomePage extends AbstractPage{
         pimHyperLink.click();
     }
 
-    /*public void logout(){
+    public WebElement getAdminHyperlink() {
+        return adminHyperlink;
+    }
+
+    public WebElement getPimHyperLink() {
+        return pimHyperLink;
+    }
+
+    public void logout(){
         welcomeTrigger.click();
-        logoutBtn.click();
-    }*/
+        WebDriverWait wait = new WebDriverWait(driver, 3);
+        wait.until(ExpectedConditions.elementToBeClickable(logoutHyperLink));
+        logoutHyperLink.click();
+    }
 }

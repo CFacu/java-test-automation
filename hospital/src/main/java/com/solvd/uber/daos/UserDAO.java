@@ -9,28 +9,29 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
-public class UserDAO implements Dao<User> {
+public class UserDAO implements IDao<User> {
 
-    private static final Logger LOGGER = Logger.getLogger(UserDAO.class);
+    private final Logger LOGGER = Logger.getLogger(UserDAO.class);
 
     @Override
-    public Optional<User> get(Long id) {
+    public User get(Long id) {
         try {
             Connection connection = ConnectionFactory.getConnection();
             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM User WHERE id=" + id);
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM Users WHERE id=" + id);
 
-            if (resultSet.next()) {
-                connection.close();
+            while (resultSet.next()) {
+
                 return extractUserFromResultSet(resultSet);
             }
+            connection.close();
         } catch (SQLException e) {
             LOGGER.error(e);
         }
-        return Optional.empty();
+        return null;
     }
 
-    private Optional<User> extractUserFromResultSet(ResultSet resultSet) throws SQLException {
+    public User extractUserFromResultSet(ResultSet resultSet) throws SQLException {
         User user = new User();
 
         user.setId(resultSet.getLong("id"));
@@ -41,7 +42,7 @@ public class UserDAO implements Dao<User> {
         user.setPhoneNumber(resultSet.getInt("phone_number"));
         user.setRate(resultSet.getInt("rate"));
 
-        return Optional.of(user);
+        return user;
     }
 
     @Override
@@ -49,11 +50,11 @@ public class UserDAO implements Dao<User> {
         try {
             Connection connection = ConnectionFactory.getConnection();
             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM User");
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM Users");
             Set users = new HashSet();
 
             while (resultSet.next()) {
-                Optional<User> user = extractUserFromResultSet(resultSet);
+                User user = extractUserFromResultSet(resultSet);
                 users.add(user);
             }
             connection.close();
@@ -68,13 +69,14 @@ public class UserDAO implements Dao<User> {
     public void insert(User user) {
         try {
             Connection connection = ConnectionFactory.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO User VALUES (NULL, ?, ?, ?, ?, ?, ?)");
-            preparedStatement.setString(1, user.getName());
-            preparedStatement.setInt(2, user.getAge());
-            preparedStatement.setInt(3, user.getRate());
-            preparedStatement.setString(4, user.getPassword());
-            preparedStatement.setInt(5, user.getPhoneNumber());
-            preparedStatement.setString(6, user.getLocation());
+            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO Users VALUES (?, ?, ?, ?, ?, ?, ?)");
+            preparedStatement.setLong(1, user.getId());
+            preparedStatement.setString(2, user.getName());
+            preparedStatement.setInt(3, user.getAge());
+            preparedStatement.setInt(4, user.getRate());
+            preparedStatement.setString(5, user.getPassword());
+            preparedStatement.setInt(6, user.getPhoneNumber());
+            preparedStatement.setString(7, user.getLocation());
 
             preparedStatement.executeUpdate();
             connection.close();
@@ -88,7 +90,7 @@ public class UserDAO implements Dao<User> {
 
         try {
             Connection connection = ConnectionFactory.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE User SET name=?, age=?, rate=?, password=?, phone_number=?, location=?");
+            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE Users SET name=?, age=?, rate=?, password=?, phone_number=?, location=?");
             preparedStatement.setString(1, user.getName());
             preparedStatement.setInt(2, user.getAge());
             preparedStatement.setInt(3, user.getRate());
@@ -109,7 +111,7 @@ public class UserDAO implements Dao<User> {
             Connection connection = ConnectionFactory.getConnection();
 
             Statement statement = connection.createStatement();
-            statement.executeUpdate("DELETE FROM User WHERE id=" + id);
+            statement.executeUpdate("DELETE FROM Users WHERE id=" + id);
 
             connection.close();
         } catch (SQLException e) {

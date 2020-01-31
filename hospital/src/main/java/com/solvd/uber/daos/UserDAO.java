@@ -15,8 +15,8 @@ public class UserDAO implements IDao<User> {
 
     @Override
     public User get(Long id) {
-        try {
-            Connection connection = ConnectionFactory.getConnection();
+        try (Connection connection = ConnectionFactory.getConnection()){
+
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT * FROM Users WHERE id=" + id);
 
@@ -24,7 +24,6 @@ public class UserDAO implements IDao<User> {
 
                 return extractUserFromResultSet(resultSet);
             }
-            connection.close();
         } catch (SQLException e) {
             LOGGER.error(e);
         }
@@ -47,8 +46,7 @@ public class UserDAO implements IDao<User> {
 
     @Override
     public Set<User> getAll() {
-        try {
-            Connection connection = ConnectionFactory.getConnection();
+        try (Connection connection = ConnectionFactory.getConnection()){
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT * FROM Users");
             Set users = new HashSet();
@@ -57,7 +55,6 @@ public class UserDAO implements IDao<User> {
                 User user = extractUserFromResultSet(resultSet);
                 users.add(user);
             }
-            connection.close();
             return users;
         } catch (SQLException e) {
             LOGGER.error(e);
@@ -67,8 +64,7 @@ public class UserDAO implements IDao<User> {
 
     @Override
     public void insert(User user) {
-        try {
-            Connection connection = ConnectionFactory.getConnection();
+        try (Connection connection = ConnectionFactory.getConnection()){
             PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO Users VALUES (?, ?, ?, ?, ?, ?, ?)");
             preparedStatement.setLong(1, user.getId());
             preparedStatement.setString(2, user.getName());
@@ -79,7 +75,6 @@ public class UserDAO implements IDao<User> {
             preparedStatement.setString(7, user.getLocation());
 
             preparedStatement.executeUpdate();
-            connection.close();
         }catch (SQLException e) {
             LOGGER.error(e);
         }
@@ -88,8 +83,7 @@ public class UserDAO implements IDao<User> {
     @Override
     public void update(User user) {
 
-        try {
-            Connection connection = ConnectionFactory.getConnection();
+        try (Connection connection = ConnectionFactory.getConnection()){
             PreparedStatement preparedStatement = connection.prepareStatement("UPDATE Users SET name=?, age=?, rate=?, password=?, phone_number=?, location=?");
             preparedStatement.setString(1, user.getName());
             preparedStatement.setInt(2, user.getAge());
@@ -99,7 +93,6 @@ public class UserDAO implements IDao<User> {
             preparedStatement.setString(6, user.getLocation());
 
             preparedStatement.executeUpdate();
-            connection.close();
         }catch (SQLException e) {
             LOGGER.error(e);
         }
@@ -107,13 +100,11 @@ public class UserDAO implements IDao<User> {
 
     @Override
     public void delete(Long id) {
-        try {
-            Connection connection = ConnectionFactory.getConnection();
+        try (Connection connection = ConnectionFactory.getConnection()){
 
             Statement statement = connection.createStatement();
             statement.executeUpdate("DELETE FROM Users WHERE id=" + id);
 
-            connection.close();
         } catch (SQLException e) {
             LOGGER.error(e);
         }

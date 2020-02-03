@@ -6,25 +6,25 @@ public class Car {
     private String color;
     private String make;
     private Integer modelYear;
-    private Driver driver;
+    private Long driverId;
 
     public Car(){}
 
-    public Car(String model, String color, String make, Integer modelYear, Driver driver) {
+    public Car(String model, String color, String make, Integer modelYear, Long driverId) {
         this.model = model;
         this.color = color;
         this.make = make;
         this.modelYear = modelYear;
-        this.driver = driver;
+        this.driverId = driverId;
     }
 
-    public Car(Long id, String model, String color, String make, Integer modelYear, Driver driver) {
+    public Car(Long id, String model, String color, String make, Integer modelYear, Long driverId) {
         this.id = id;
         this.model = model;
         this.color = color;
         this.make = make;
         this.modelYear = modelYear;
-        this.driver = driver;
+        this.driverId = driverId;
     }
 
     public Long getId() {
@@ -67,11 +67,11 @@ public class Car {
         this.modelYear = modelYear;
     }
 
-    public Driver getDriver() {
-        return driver;
+    public Long getDriverId() {
+        return driverId;
     }
 
-    public void setDriver(Driver driver) {
-        this.driver = driver;
+    public void setDriverId(Long driverId) {
+        this.driverId = driverId;
     }
 }

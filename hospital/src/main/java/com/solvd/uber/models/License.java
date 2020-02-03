@@ -6,22 +6,22 @@ public class License {
     private Long id;
     private Integer number;
     private Date expDate;
-    private Driver drive;
+    private Long driversId;
 
     public License() {
     }
 
-    public License(Integer number, Date expDate, Driver drive) {
+    public License(Integer number, Date expDate, Long driversId) {
         this.number = number;
         this.expDate = expDate;
-        this.drive = drive;
+        this.driversId = driversId;
     }
 
-    public License(Long id, Integer number, Date expDate, Driver drive) {
+    public License(Long id, Integer number, Date expDate, Long driversId) {
         this.id = id;
         this.number = number;
         this.expDate = expDate;
-        this.drive = drive;
+        this.driversId = driversId;
     }
 
     public Long getId() {
@@ -48,11 +48,11 @@ public class License {
         this.expDate = expDate;
     }
 
-    public Driver getDrive() {
-        return drive;
+    public Long getDriversId() {
+        return driversId;
     }
 
-    public void setDrive(Driver drive) {
-        this.drive = drive;
+    public void setDriversId(Long driversId) {
+        this.driversId = driversId;
     }
 }

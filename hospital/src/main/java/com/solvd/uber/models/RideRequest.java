@@ -7,27 +7,27 @@ public class RideRequest {
     private Date requestTime;
     private String locationStart;
     private String locationEnd;
-    private Ride ride;
-    private User user;
+    private Long rideId;
+    private Long userId;
 
     public RideRequest() {
     }
 
-    public RideRequest(Date requestTime, String locationStart, String locationEnd, Ride ride, User user) {
+    public RideRequest(Date requestTime, String locationStart, String locationEnd, Long rideId, Long userId) {
         this.requestTime = requestTime;
         this.locationStart = locationStart;
         this.locationEnd = locationEnd;
-        this.ride = ride;
-        this.user = user;
+        this.rideId = rideId;
+        this.userId = userId;
     }
 
-    public RideRequest(Long id, Date requestTime, String locationStart, String locationEnd, Ride ride, User user) {
+    public RideRequest(Long id, Date requestTime, String locationStart, String locationEnd, Long rideId, Long userId) {
         this.id = id;
         this.requestTime = requestTime;
         this.locationStart = locationStart;
         this.locationEnd = locationEnd;
-        this.ride = ride;
-        this.user = user;
+        this.rideId = rideId;
+        this.userId = userId;
     }
 
     public Long getId() {
@@ -62,19 +62,19 @@ public class RideRequest {
         this.locationEnd = locationEnd;
     }
 
-    public Ride getRide() {
-        return ride;
+    public Long getRideId() {
+        return rideId;
     }
 
-    public void setRide(Ride ride) {
-        this.ride = ride;
+    public void setRideId(Long rideId) {
+        this.rideId = rideId;
     }
 
-    public User getUser() {
-        return user;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 }

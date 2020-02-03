@@ -1,11 +1,8 @@
 package com.solvd.uber.daos;
 
-import com.solvd.uber.models.User;
-
-import java.util.Optional;
 import java.util.Set;
 
-public interface IDao<T> {
+public interface IDAO<T> {
     T get(Long id);
     Set<T> getAll();
     void insert(T t);

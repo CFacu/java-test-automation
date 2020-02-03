@@ -8,26 +8,26 @@ public class Ride {
     private Date pickUpTime;
     private Date dropOffTime;
     private Double cost;
-    private Driver driver;
+    private Long driversId;
 
     public Ride() {
     }
 
-    public Ride(Integer distance, Date pickUpTime, Date dropOffTime, Double cost, Driver driver) {
+    public Ride(Integer distance, Date pickUpTime, Date dropOffTime, Double cost, Long driversId) {
         this.distance = distance;
         this.pickUpTime = pickUpTime;
         this.dropOffTime = dropOffTime;
         this.cost = cost;
-        this.driver = driver;
+        this.driversId = driversId;
     }
 
-    public Ride(Long id, Integer distance, Date pickUpTime, Date dropOffTime, Double cost, Driver driver) {
+    public Ride(Long id, Integer distance, Date pickUpTime, Date dropOffTime, Double cost, Long driversId) {
         this.id = id;
         this.distance = distance;
         this.pickUpTime = pickUpTime;
         this.dropOffTime = dropOffTime;
         this.cost = cost;
-        this.driver = driver;
+        this.driversId = driversId;
     }
 
     public Long getId() {
@@ -70,11 +70,11 @@ public class Ride {
         this.cost = cost;
     }
 
-    public Driver getDriver() {
-        return driver;
+    public Long getDriversId() {
+        return driversId;
     }
 
-    public void setDriver(Driver driver) {
-        this.driver = driver;
+    public void setDriversId(Long driversId) {
+        this.driversId = driversId;
     }
 }

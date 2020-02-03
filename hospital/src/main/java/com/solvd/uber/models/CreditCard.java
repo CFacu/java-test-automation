@@ -6,22 +6,22 @@ public class CreditCard {
     private Long id;
     private Integer number;
     private Date expDate;
-    private User user;
+    private Long userId;
 
     public CreditCard() {
     }
 
-    public CreditCard(Integer number, Date expDate, User user) {
+    public CreditCard(Integer number, Date expDate, Long userId) {
         this.number = number;
         this.expDate = expDate;
-        this.user = user;
+        this.userId = userId;
     }
 
-    public CreditCard(Long id, Integer number, Date expDate, User user) {
+    public CreditCard(Long id, Integer number, Date expDate, Long userId) {
         this.id = id;
         this.number = number;
         this.expDate = expDate;
-        this.user = user;
+        this.userId = userId;
     }
 
     public Long getId() {
@@ -48,11 +48,11 @@ public class CreditCard {
         this.expDate = expDate;
     }
 
-    public User getUser() {
-        return user;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 }

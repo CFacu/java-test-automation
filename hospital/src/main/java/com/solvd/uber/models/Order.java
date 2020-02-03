@@ -2,29 +2,29 @@ package com.solvd.uber.models;
 
 import java.sql.Date;
 
-public class ServiceCar {
+public class Order {
     private Long id;
     private Date date;
     private Double cost;
-    private Service service;
-    private Car car;
+    private Long serviceId;
+    private Long carId;
 
-    public ServiceCar() {
+    public Order() {
     }
 
-    public ServiceCar(Date date, Double cost, Service service, Car car) {
+    public Order(Date date, Double cost, Long serviceId, Long carId) {
         this.date = date;
         this.cost = cost;
-        this.service = service;
-        this.car = car;
+        this.serviceId = serviceId;
+        this.carId = carId;
     }
 
-    public ServiceCar(Long id, Date date, Double cost, Service service, Car car) {
+    public Order(Long id, Date date, Double cost, Long serviceId, Long carId) {
         this.id = id;
         this.date = date;
         this.cost = cost;
-        this.service = service;
-        this.car = car;
+        this.serviceId = serviceId;
+        this.carId = carId;
     }
 
     public Long getId() {
@@ -51,19 +51,19 @@ public class ServiceCar {
         this.cost = cost;
     }
 
-    public Service getService() {
-        return service;
+    public Long getServiceId() {
+        return serviceId;
     }
 
-    public void setService(Service service) {
-        this.service = service;
+    public void setServiceId(Long serviceId) {
+        this.serviceId = serviceId;
     }
 
-    public Car getCar() {
-        return car;
+    public Long getCarId() {
+        return carId;
     }
 
-    public void setCar(Car car) {
-        this.car = car;
+    public void setCarId(Long carId) {
+        this.carId = carId;
     }
 }

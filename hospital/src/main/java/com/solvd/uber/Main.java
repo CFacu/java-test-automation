@@ -9,15 +9,13 @@ import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) {
-        UserDAO user = new UserDAO();
-        User asd = user.get(123L);
+        UserDAO userDAO = new UserDAO();
+        User userToJson = userDAO.get(1L);
 
-        ObjectMapper objectMapper = new ObjectMapper();
+        userDAO.mapperToJson(userToJson);
 
-        try {
-            objectMapper.writeValue(new File("target/user.json"), asd);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        User userFromJson = userDAO.mapperFromJson("target/json_user.json");
+
+
     }
 }

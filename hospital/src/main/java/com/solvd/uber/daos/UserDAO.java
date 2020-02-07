@@ -1,9 +1,12 @@
 package com.solvd.uber.daos;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.solvd.uber.connection.ConnectionPool;
 import com.solvd.uber.models.User;
 import org.apache.log4j.Logger;
 
+import java.io.File;
+import java.io.IOException;
 import java.sql.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -104,5 +107,27 @@ public class UserDAO implements IDAO<User> {
         } catch (SQLException e) {
             LOGGER.error(e);
         }
+    }
+
+    public void mapperToJson(User user) {
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        try {
+            objectMapper.writeValue(new File("target/user.json"), user);
+        } catch (IOException e) {
+            LOGGER.error(e);
+        }
+    }
+
+    public User mapperFromJson(String path) {
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        try {
+            User user = objectMapper.readValue(new File(path), User.class);
+            return user;
+        } catch (IOException e) {
+            LOGGER.error(e);
+        }
+        return null;
     }
 }

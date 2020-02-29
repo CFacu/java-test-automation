@@ -1,6 +1,7 @@
 package com.solvd.hospital.hospitals;
 
 import com.solvd.hospital.exceptions.NameNotFoundException;
+import com.solvd.hospital.lambda.Sort;
 import com.solvd.hospital.people.employee.medical.Nurse;
 import com.solvd.hospital.people.employee.medical.Doctor;
 import com.solvd.hospital.people.Patient;
@@ -89,4 +90,9 @@ public abstract class AbstractHospital {
         if (this.doctors.stream().noneMatch(doc -> doc.getName().equals(name))) throw new NameNotFoundException("The doctor is not in our database");
         else return (this.doctors.stream().filter(doc -> doc.getName().equals(name)).findAny());
     }
+
+    public void sortDoctors(Sort sortMethod) {
+        sortMethod.sort(doctors);
+    }
+
 }

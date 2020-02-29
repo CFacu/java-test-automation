@@ -1,4 +1,4 @@
-package com.solvd.uber.daos;
+package com.solvd.uber.daos.interfaces;
 
 import java.util.Set;
 

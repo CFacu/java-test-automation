@@ -171,7 +171,6 @@ public class UserDAO implements IUserDAO {
 
     public void mapperToJson(User user) {
         ObjectMapper objectMapper = new ObjectMapper();
-
         try {
             objectMapper.writeValue(new File("target/user.json"), user);
         } catch (IOException e) {

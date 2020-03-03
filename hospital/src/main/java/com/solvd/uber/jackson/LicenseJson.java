@@ -1,26 +1,33 @@
-package com.solvd.uber.models;
+package com.solvd.uber.jackson;
 
-import java.sql.Date;
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonRootName;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-public class License {
+import java.util.Date;
+
+@JsonRootName("License")
+public class LicenseJson {
     private Long id;
     private Integer number;
+    @JsonSerialize(using = DateHandler.class)
     private Date expDate;
 
-    public License() {
+    public LicenseJson() {
     }
 
-    public License(Integer number, Date expDate) {
+    public LicenseJson(Integer number, Date expDate) {
         this.number = number;
         this.expDate = expDate;
     }
 
-    public License(Long id, Integer number, Date expDate) {
+    public LicenseJson(Long id, Integer number, Date expDate) {
         this.id = id;
         this.number = number;
         this.expDate = expDate;
     }
 
+    @JsonGetter("id")
     public Long getId() {
         return id;
     }
@@ -29,6 +36,7 @@ public class License {
         this.id = id;
     }
 
+    @JsonGetter("number")
     public Integer getNumber() {
         return number;
     }
@@ -37,7 +45,8 @@ public class License {
         this.number = number;
     }
 
-    public java.sql.Date getExpDate() {
+    @JsonGetter("expDate")
+    public Date getExpDate() {
         return expDate;
     }
 

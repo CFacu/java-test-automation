@@ -1,46 +1,40 @@
-package com.solvd.uber.models;
+package com.solvd.uber.stax;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.solvd.uber.jackson.LicenseJson;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import java.sql.Date;
+import java.util.Date;
 
-@XmlRootElement(name = "driver")
-public class Driver {
-    @JsonProperty("driverId")
+public class StaxDriver {
     private Long id;
     private String name;
     private String password;
     private Date birthDate;
     private Integer phoneNumber;
     private Integer rate;
-    private License license;
+    private StaxLicense license;
 
-    public Driver() {
+    public StaxDriver() {
     }
 
-    public Driver(String name, String password, Date birthDate, Integer phoneNumber, Integer rate, Integer number, Date expDate) {
+    public StaxDriver(String name, String password, Date birthDate, Integer phoneNumber, Integer rate, Integer licenseNumber, Date licenseExpDate) {
         this.name = name;
         this.password = password;
         this.birthDate = birthDate;
         this.phoneNumber = phoneNumber;
         this.rate = rate;
-        this.license = new License(number, expDate);
+        this.license = new StaxLicense(licenseNumber, licenseExpDate);
     }
 
-    public Driver(Long id, String name, String password, Date birthDate, Integer phoneNumber, Integer rate, Integer number, Date expDate) {
+    public StaxDriver(Long id, String name, String password, Date birthDate, Integer phoneNumber, Integer rate, StaxLicense license) {
         this.id = id;
         this.name = name;
         this.password = password;
         this.birthDate = birthDate;
         this.phoneNumber = phoneNumber;
         this.rate = rate;
-        this.license = new License(number, expDate);
+        this.license = license;
     }
 
-    @XmlAttribute
     public Long getId() {
         return id;
     }
@@ -65,7 +59,6 @@ public class Driver {
         this.password = password;
     }
 
-    @XmlElement(name = "birthDate")
     public Date getBirthDate() {
         return birthDate;
     }
@@ -90,12 +83,11 @@ public class Driver {
         this.rate = rate;
     }
 
-    @XmlElement(name = "license")
-    public License getLicense() {
+    public StaxLicense getLicense() {
         return license;
     }
 
-    public void setLicense(License license) {
+    public void setLicense(StaxLicense license) {
         this.license = license;
     }
 }

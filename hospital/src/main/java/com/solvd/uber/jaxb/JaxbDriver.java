@@ -1,46 +1,39 @@
-package com.solvd.uber.models;
+package com.solvd.uber.jaxb;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.Date;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import java.sql.Date;
-
-@XmlRootElement(name = "driver")
-public class Driver {
-    @JsonProperty("driverId")
+public class JaxbDriver {
     private Long id;
     private String name;
     private String password;
     private Date birthDate;
     private Integer phoneNumber;
     private Integer rate;
-    private License license;
+    private JaxbLicense license;
 
-    public Driver() {
+    public JaxbDriver() {
     }
 
-    public Driver(String name, String password, Date birthDate, Integer phoneNumber, Integer rate, Integer number, Date expDate) {
+    public JaxbDriver(String name, String password, Date birthDate, Integer phoneNumber, Integer rate, Integer licenseNumber, Date licenseExpDate) {
         this.name = name;
         this.password = password;
         this.birthDate = birthDate;
         this.phoneNumber = phoneNumber;
         this.rate = rate;
-        this.license = new License(number, expDate);
+        this.license = new JaxbLicense(licenseNumber, licenseExpDate);
     }
 
-    public Driver(Long id, String name, String password, Date birthDate, Integer phoneNumber, Integer rate, Integer number, Date expDate) {
+    public JaxbDriver(Long id, String name, String password, Date birthDate, Integer phoneNumber, Integer rate,  Integer licenseNumber, Date licenseExpDate) {
         this.id = id;
         this.name = name;
         this.password = password;
         this.birthDate = birthDate;
         this.phoneNumber = phoneNumber;
         this.rate = rate;
-        this.license = new License(number, expDate);
+        this.license = new JaxbLicense(licenseNumber, licenseExpDate);
     }
 
-    @XmlAttribute
+
     public Long getId() {
         return id;
     }
@@ -65,7 +58,6 @@ public class Driver {
         this.password = password;
     }
 
-    @XmlElement(name = "birthDate")
     public Date getBirthDate() {
         return birthDate;
     }
@@ -90,12 +82,11 @@ public class Driver {
         this.rate = rate;
     }
 
-    @XmlElement(name = "license")
-    public License getLicense() {
+    public JaxbLicense getLicense() {
         return license;
     }
 
-    public void setLicense(License license) {
+    public void setLicense(JaxbLicense license) {
         this.license = license;
     }
 }

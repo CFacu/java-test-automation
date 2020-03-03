@@ -1,0 +1,14 @@
+<?xml version="1.0" ?>
+<drivers>
+<driver id="1">
+<name>Peter</name>
+<password>qwe123</password>
+<birthDate>Thu May 18 00:00:00 ART 1995</birthDate>
+<phoneNumber>123456789</phoneNumber>
+<rate>4</rate>
+<license id="1">
+<number>165165</number>
+<expDate>Fri Aug 11 00:00:00 ART 2023</expDate>
+</license>
+</driver>
+</drivers>

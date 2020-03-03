@@ -15,8 +15,8 @@ public class LicenseDAO implements ILicenseDAO {
 
     private static final String INSERT_LICENSE =
             "INSERT INTO licenses " +
-                    "(number, exp_date, drivers_id) " +
-                    "VALUES (?, ?, ?)";
+                    "(number, exp_date) " +
+                    "VALUES (?, ?)";
 
     private static final String GET_LICENSE_BY_ID =
             "SELECT * " +
@@ -28,7 +28,7 @@ public class LicenseDAO implements ILicenseDAO {
 
     private static final String UPDATE_LICENSE =
             "UPDATE licenses " +
-                    "SET number, exp_date, drivers_id " +
+                    "SET number, exp_date" +
                     "WHERE id = ?";
 
     private final static String DELETE_LICENSE =
@@ -64,7 +64,6 @@ public class LicenseDAO implements ILicenseDAO {
         license.setId(resultSet.getLong("id"));
         license.setExpDate(resultSet.getDate("exp_date"));
         license.setNumber(resultSet.getInt("number"));
-        license.setDriversId(resultSet.getLong("drivers_id"));
 
         return license;
     }
@@ -102,7 +101,6 @@ public class LicenseDAO implements ILicenseDAO {
             PreparedStatement preparedStatement = connection.prepareStatement(INSERT_LICENSE);
             preparedStatement.setInt(1, license.getNumber());
             preparedStatement.setDate(2, license.getExpDate());
-            preparedStatement.setLong(3, license.getDriversId());
             preparedStatement.executeUpdate();
             connection.commit();
         }catch (SQLException e) {
@@ -124,7 +122,6 @@ public class LicenseDAO implements ILicenseDAO {
             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_LICENSE);
             preparedStatement.setInt(1, license.getNumber());
             preparedStatement.setDate(2, license.getExpDate());
-            preparedStatement.setLong(3, license.getDriversId());
             preparedStatement.executeUpdate();
             connection.commit();
         }catch (SQLException e) {

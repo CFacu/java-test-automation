@@ -1,0 +1,27 @@
+{
+  "ArrayList" : [ {
+    "id" : 456,
+    "name" : "Rupert",
+    "password" : null,
+    "birthDate" : "1984-03-04",
+    "phoneNumber" : 4654798,
+    "rate" : 4,
+    "license" : {
+      "id" : 516,
+      "number" : 616516,
+      "expDate" : "2030-05-10"
+    }
+  }, {
+    "id" : 987,
+    "name" : "Bob",
+    "password" : null,
+    "birthDate" : "1965-05-14",
+    "phoneNumber" : 4689152,
+    "rate" : 5,
+    "license" : {
+      "id" : 246,
+      "number" : 156656,
+      "expDate" : "2031-08-11"
+    }
+  } ]
+}

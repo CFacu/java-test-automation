@@ -1,46 +1,45 @@
-package com.solvd.uber.models;
+package com.solvd.uber.jackson;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonRootName;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import java.sql.Date;
+import java.util.Date;
 
-@XmlRootElement(name = "driver")
-public class Driver {
-    @JsonProperty("driverId")
+@JsonRootName("Driver")
+public class DriverJson {
     private Long id;
     private String name;
     private String password;
+    @JsonSerialize(using = DateHandler.class)
     private Date birthDate;
     private Integer phoneNumber;
     private Integer rate;
-    private License license;
+    private LicenseJson license;
 
-    public Driver() {
+    public DriverJson() {
     }
 
-    public Driver(String name, String password, Date birthDate, Integer phoneNumber, Integer rate, Integer number, Date expDate) {
+    public DriverJson(String name, String password, Date birthDate, Integer phoneNumber, Integer rate, Integer licenseNumber, Date licenseExpDate) {
         this.name = name;
         this.password = password;
         this.birthDate = birthDate;
         this.phoneNumber = phoneNumber;
         this.rate = rate;
-        this.license = new License(number, expDate);
+        this.license = new LicenseJson(licenseNumber, licenseExpDate);
     }
 
-    public Driver(Long id, String name, String password, Date birthDate, Integer phoneNumber, Integer rate, Integer number, Date expDate) {
+    public DriverJson(Long id, String name, String password, Date birthDate, Integer phoneNumber, Integer rate, LicenseJson license) {
         this.id = id;
         this.name = name;
         this.password = password;
         this.birthDate = birthDate;
         this.phoneNumber = phoneNumber;
         this.rate = rate;
-        this.license = new License(number, expDate);
+        this.license = license;
     }
 
-    @XmlAttribute
+    @JsonGetter("id")
     public Long getId() {
         return id;
     }
@@ -49,6 +48,7 @@ public class Driver {
         this.id = id;
     }
 
+    @JsonGetter("name")
     public String getName() {
         return name;
     }
@@ -57,6 +57,7 @@ public class Driver {
         this.name = name;
     }
 
+    @JsonGetter("password")
     public String getPassword() {
         return password;
     }
@@ -65,7 +66,7 @@ public class Driver {
         this.password = password;
     }
 
-    @XmlElement(name = "birthDate")
+    @JsonGetter("birthDate")
     public Date getBirthDate() {
         return birthDate;
     }
@@ -74,6 +75,7 @@ public class Driver {
         this.birthDate = birthDate;
     }
 
+    @JsonGetter("phoneNumber")
     public Integer getPhoneNumber() {
         return phoneNumber;
     }
@@ -82,6 +84,7 @@ public class Driver {
         this.phoneNumber = phoneNumber;
     }
 
+    @JsonGetter("rate")
     public Integer getRate() {
         return rate;
     }
@@ -90,12 +93,12 @@ public class Driver {
         this.rate = rate;
     }
 
-    @XmlElement(name = "license")
-    public License getLicense() {
+    @JsonGetter("license")
+    public LicenseJson getLicense() {
         return license;
     }
 
-    public void setLicense(License license) {
+    public void setLicense(LicenseJson license) {
         this.license = license;
     }
 }

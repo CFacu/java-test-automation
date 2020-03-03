@@ -1,21 +1,21 @@
-package com.solvd.uber.models;
+package com.solvd.uber.jaxb;
 
-import java.sql.Date;
+import java.util.Date;
 
-public class License {
+public class JaxbLicense {
     private Long id;
     private Integer number;
     private Date expDate;
 
-    public License() {
+    public JaxbLicense() {
     }
 
-    public License(Integer number, Date expDate) {
+    public JaxbLicense(Integer number, Date expDate) {
         this.number = number;
         this.expDate = expDate;
     }
 
-    public License(Long id, Integer number, Date expDate) {
+    public JaxbLicense(Long id, Integer number, Date expDate) {
         this.id = id;
         this.number = number;
         this.expDate = expDate;
@@ -37,7 +37,7 @@ public class License {
         this.number = number;
     }
 
-    public java.sql.Date getExpDate() {
+    public Date getExpDate() {
         return expDate;
     }
 

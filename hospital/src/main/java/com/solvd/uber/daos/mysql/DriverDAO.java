@@ -5,7 +5,10 @@ import com.solvd.uber.daos.interfaces.IDriverDAO;
 import com.solvd.uber.models.Driver;
 import org.apache.log4j.Logger;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Set;
 

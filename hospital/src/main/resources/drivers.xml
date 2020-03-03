@@ -1,0 +1,28 @@
+<drivers>
+    <driver>
+        <id>1</id>
+        <name>Peter</name>
+        <password>qwe123</password>
+        <birthDate>1995-05-18</birthDate>
+        <phoneNumber>123456789</phoneNumber>
+        <rate>4</rate>
+        <license>
+            <id>1</id>
+            <number>165165</number>
+            <expDate>2023-08-11</expDate>
+        </license>
+    </driver>
+    <driver>
+        <id>2</id>
+        <name>Robert</name>
+        <password>qdfg8</password>
+        <birthDate>1984-12-05</birthDate>
+        <phoneNumber>35435345</phoneNumber>
+        <rate>3</rate>
+        <license>
+            <id>2</id>
+            <number>897897</number>
+            <expDate>2021-02-11</expDate>
+        </license>
+    </driver>
+</drivers>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.solvd.uber.daos.interfaces.IDriverDAO">
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        <![CDATA[
+            INSERT INTO Drivers (name, password, birth_date, phone_number, rate)
+            VALUES (${name}, ${password}, ${birth_date}, ${phone_number}, ${rate})
+        ]]>
+    </insert>
+    <update id="update">
+        <![CDATA[
+            UPDATE Drivers SET
+            name = ${name},
+            password = ${password},
+            birth_date = ${birth_date},
+            phone_number = ${phone_number},
+            rate = ${rate}
+        ]]>
+    </update>
+    <delete id="delete">
+        <![CDATA[
+            DELETE FROM Drivers
+            WHERE id = ${id}
+        ]]>
+    </delete>
+    <resultMap id="DriverMap" type="com.solvd.uber.models.Driver" autoMapping="false">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="password" column="password"/>
+        <result property="birthDate" column="birthDate"/>
+        <result property="phoneNumber" column="phoneNumber"/>
+        <result property="rate" column="rate"/>
+        <result property="license" column="license"/>
+    </resultMap>
+</mapper>

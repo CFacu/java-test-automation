@@ -6,7 +6,9 @@ import com.solvd.uber.models.Address;
 import org.apache.log4j.Logger;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class AddressDAO implements IAddressDAO {
@@ -70,12 +72,12 @@ public class AddressDAO implements IAddressDAO {
     }
 
     @Override
-    public Set<Address> getAll() {
+    public List<Address> getAll() {
         Connection connection = ConnectionPool.getInstance().getConnection();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(GET_ADDRESSES);
             ResultSet resultSet = preparedStatement.executeQuery();
-            Set<Address> addresses = new HashSet<Address>();
+            List<Address> addresses = new ArrayList<>();
 
             while (resultSet.next()) {
                 Address address = extractUserFromResultSet(resultSet);

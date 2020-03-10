@@ -1,0 +1,13 @@
+<drivers>
+    <driver driverId = "8">
+        <name>Peter</name>
+        <password>qwe123</password>
+        <birthDate>1995-05-18</birthDate>
+        <phoneNumber>123456789</phoneNumber>
+        <rate>4</rate>
+        <license licenseId = "5">
+            <number>165165</number>
+            <expDate>2023-08-11</expDate>
+        </license>
+    </driver>
+</drivers>

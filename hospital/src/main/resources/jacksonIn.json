@@ -1,0 +1,12 @@
+{
+  "name": "Bob",
+  "password": "qe56we6wq4",
+  "birthDate": "1965-05-15",
+  "rate": 5,
+  "phoneNumber": 4689152,
+  "license": {
+    "number": 156656,
+    "expDate": "2031-08-12"
+  }
+
+}

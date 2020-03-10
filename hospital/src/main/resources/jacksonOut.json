@@ -1,0 +1,77 @@
+[ {
+  "id" : 1,
+  "name" : "Facundo",
+  "password" : "asd123",
+  "birthDate" : "1998-03-13",
+  "phoneNumber" : 123456,
+  "rate" : 5,
+  "license" : {
+    "id" : 1,
+    "number" : 6516516,
+    "expDate" : "2023-05-02",
+    "driverId" : 1
+  }
+}, {
+  "id" : 2,
+  "name" : "Joe",
+  "password" : "456dsa",
+  "birthDate" : "1989-01-16",
+  "phoneNumber" : 654897,
+  "rate" : 4,
+  "license" : {
+    "id" : 4,
+    "number" : 3166489,
+    "expDate" : "2023-05-02",
+    "driverId" : 2
+  }
+}, {
+  "id" : 3,
+  "name" : "Denis",
+  "password" : "789fgb",
+  "birthDate" : "1978-07-10",
+  "phoneNumber" : 456123,
+  "rate" : 2,
+  "license" : {
+    "id" : 3,
+    "number" : 6516949,
+    "expDate" : "2027-08-15",
+    "driverId" : 3
+  }
+}, {
+  "id" : 4,
+  "name" : "Emma",
+  "password" : "qwe852",
+  "birthDate" : "1994-02-23",
+  "phoneNumber" : 987654,
+  "rate" : 5,
+  "license" : {
+    "id" : 2,
+    "number" : 4984562,
+    "expDate" : "2027-08-15",
+    "driverId" : 4
+  }
+}, {
+  "id" : 5,
+  "name" : "Charlotte",
+  "password" : "fgh741",
+  "birthDate" : "1993-05-02",
+  "phoneNumber" : 741963,
+  "rate" : 4,
+  "license" : null
+}, {
+  "id" : 6,
+  "name" : "Robert",
+  "password" : "ngfbo16",
+  "birthDate" : "1969-12-31",
+  "phoneNumber" : 15648989,
+  "rate" : 4,
+  "license" : null
+}, {
+  "id" : 7,
+  "name" : "Bob",
+  "password" : "qe56we6wq4",
+  "birthDate" : "1965-05-14",
+  "phoneNumber" : 4689152,
+  "rate" : 5,
+  "license" : null
+} ]

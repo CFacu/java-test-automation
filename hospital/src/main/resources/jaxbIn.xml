@@ -1,0 +1,14 @@
+<driver>
+    <id>123</id>
+    <name>Pipo</name>
+    <password>qw56e56qwe4</password>
+    <birthDate>1984-04-03</birthDate>
+    <phoneNumber>584689469</phoneNumber>
+    <rate>2</rate>
+    <license>
+        <id>987</id>
+        <number>16948</number>
+        <expDate>2030-08-04</expDate>
+        <driverId>123</driverId>
+    </license>
+</driver>

@@ -6,7 +6,9 @@ import com.solvd.uber.models.CreditCard;
 import org.apache.log4j.Logger;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class CreditCardDAO implements ICreditCardDAO {
@@ -70,12 +72,12 @@ public class CreditCardDAO implements ICreditCardDAO {
     }
 
     @Override
-    public Set<CreditCard> getAll() {
+    public List<CreditCard> getAll() {
         Connection connection = ConnectionPool.getInstance().getConnection();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(GET_CREDIT_CARD);
             ResultSet resultSet = preparedStatement.executeQuery();
-            Set<CreditCard> creditCards = new HashSet<CreditCard>();
+            List<CreditCard> creditCards = new ArrayList<>();
 
             while (resultSet.next()) {
                 CreditCard creditCard = extractUserFromResultSet(resultSet);

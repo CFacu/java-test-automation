@@ -1,10 +1,10 @@
 package com.solvd.uber.daos.interfaces;
 
-import java.util.Set;
+import java.util.List;
 
 public interface IDAO<T> {
     T get(Long id);
-    Set<T> getAll();
+    List<T> getAll();
     void insert(T t);
     void update(T t);
     void delete(Long id);

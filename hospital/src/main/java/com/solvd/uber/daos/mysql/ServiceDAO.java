@@ -6,7 +6,9 @@ import com.solvd.uber.models.Service;
 import org.apache.log4j.Logger;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class ServiceDAO implements IServiceDAO {
@@ -69,12 +71,12 @@ public class ServiceDAO implements IServiceDAO {
     }
 
     @Override
-    public Set<Service> getAll() {
+    public List<Service> getAll() {
         Connection connection = ConnectionPool.getInstance().getConnection();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(GET_SERVICE);
             ResultSet resultSet = preparedStatement.executeQuery();
-            Set<Service> services = new HashSet<Service>();
+            List<Service> services = new ArrayList<>();
 
             while (resultSet.next()) {
                 Service service = extractUserFromResultSet(resultSet);

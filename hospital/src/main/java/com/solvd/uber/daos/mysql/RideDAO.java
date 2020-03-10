@@ -6,7 +6,9 @@ import com.solvd.uber.models.Ride;
 import org.apache.log4j.Logger;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class RideDAO implements IRideDAO {
@@ -72,12 +74,12 @@ public class RideDAO implements IRideDAO {
     }
 
     @Override
-    public Set<Ride> getAll() {
+    public List<Ride> getAll() {
         Connection connection = ConnectionPool.getInstance().getConnection();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(GET_RIDE);
             ResultSet resultSet = preparedStatement.executeQuery();
-            Set<Ride> rides = new HashSet<Ride>();
+            List<Ride> rides = new ArrayList<>();
 
             while (resultSet.next()) {
                 Ride ride = extractUserFromResultSet(resultSet);

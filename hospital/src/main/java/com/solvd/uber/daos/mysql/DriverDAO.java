@@ -9,7 +9,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class DriverDAO implements IDriverDAO {
@@ -75,12 +77,12 @@ public class DriverDAO implements IDriverDAO {
     }
 
     @Override
-    public Set<Driver> getAll() {
+    public List<Driver> getAll() {
         Connection connection = ConnectionPool.getInstance().getConnection();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(GET_DRIVER);
             ResultSet resultSet = preparedStatement.executeQuery();
-            Set<Driver> drivers = new HashSet<Driver>();
+            List<Driver> drivers = new ArrayList<>();
 
             while (resultSet.next()) {
                 Driver driver = extractUserFromResultSet(resultSet);

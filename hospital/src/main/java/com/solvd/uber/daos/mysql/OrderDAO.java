@@ -6,7 +6,9 @@ import com.solvd.uber.models.Order;
 import org.apache.log4j.Logger;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class OrderDAO implements IOrderDAO {
@@ -71,12 +73,12 @@ public class OrderDAO implements IOrderDAO {
     }
 
     @Override
-    public Set<Order> getAll() {
+    public List<Order> getAll() {
         Connection connection = ConnectionPool.getInstance().getConnection();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(GET_ORDER);
             ResultSet resultSet = preparedStatement.executeQuery();
-            Set<Order> orders = new HashSet<Order>();
+            List<Order> orders = new ArrayList<>();
 
             while (resultSet.next()) {
                 Order order = extractUserFromResultSet(resultSet);

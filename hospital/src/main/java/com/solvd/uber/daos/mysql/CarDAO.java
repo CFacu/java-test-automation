@@ -6,7 +6,9 @@ import com.solvd.uber.models.Car;
 import org.apache.log4j.Logger;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class CarDAO implements ICarDAO {
@@ -72,12 +74,12 @@ public class CarDAO implements ICarDAO {
     }
 
     @Override
-    public Set<Car> getAll() {
+    public List<Car> getAll() {
         Connection connection = ConnectionPool.getInstance().getConnection();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(GET_CAR);
             ResultSet resultSet = preparedStatement.executeQuery();
-            Set<Car> cars = new HashSet<Car>();
+            List<Car> cars = new ArrayList<>();
 
             while (resultSet.next()) {
                 Car car = extractUserFromResultSet(resultSet);

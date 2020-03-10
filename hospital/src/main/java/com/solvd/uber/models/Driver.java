@@ -1,21 +1,35 @@
 package com.solvd.uber.models;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.solvd.uber.daos.mysql.LicenseDAO;
+import com.solvd.uber.jackson.DateHandler;
+import com.solvd.uber.jaxb.DateAdapter;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.sql.Date;
 
 @XmlRootElement(name = "driver")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Driver {
-    @JsonProperty("driverId")
+    @JsonProperty("id")
+    @XmlAttribute(name = "id")
     private Long id;
+    @XmlElement(name = "name")
     private String name;
+    @XmlElement(name = "password")
     private String password;
+    @JsonSerialize(using = DateHandler.class)
+    @XmlJavaTypeAdapter(DateAdapter.class)
+    @XmlElement(name = "birthDate")
     private Date birthDate;
+    @XmlElement(name = "phoneNumber")
     private Integer phoneNumber;
+    @XmlElement(name = "rate")
     private Integer rate;
+    @XmlElement(name = "license")
     private License license;
 
     public Driver() {
@@ -27,7 +41,7 @@ public class Driver {
         this.birthDate = birthDate;
         this.phoneNumber = phoneNumber;
         this.rate = rate;
-        this.license = new License(number, expDate);
+        this.license = new License(number, expDate, this.id);
     }
 
     public Driver(Long id, String name, String password, Date birthDate, Integer phoneNumber, Integer rate, Integer number, Date expDate) {
@@ -37,10 +51,10 @@ public class Driver {
         this.birthDate = birthDate;
         this.phoneNumber = phoneNumber;
         this.rate = rate;
-        this.license = new License(number, expDate);
+        this.license = new License(number, expDate, this.id);
     }
 
-    @XmlAttribute
+    @JsonGetter("id")
     public Long getId() {
         return id;
     }
@@ -49,6 +63,7 @@ public class Driver {
         this.id = id;
     }
 
+    @JsonGetter("name")
     public String getName() {
         return name;
     }
@@ -57,6 +72,7 @@ public class Driver {
         this.name = name;
     }
 
+    @JsonGetter("password")
     public String getPassword() {
         return password;
     }
@@ -65,7 +81,7 @@ public class Driver {
         this.password = password;
     }
 
-    @XmlElement(name = "birthDate")
+    @JsonGetter("birthDate")
     public Date getBirthDate() {
         return birthDate;
     }
@@ -74,6 +90,7 @@ public class Driver {
         this.birthDate = birthDate;
     }
 
+    @JsonGetter("phoneNumber")
     public Integer getPhoneNumber() {
         return phoneNumber;
     }
@@ -82,6 +99,7 @@ public class Driver {
         this.phoneNumber = phoneNumber;
     }
 
+    @JsonGetter("rate")
     public Integer getRate() {
         return rate;
     }
@@ -90,9 +108,10 @@ public class Driver {
         this.rate = rate;
     }
 
-    @XmlElement(name = "license")
+    @JsonGetter("license")
     public License getLicense() {
-        return license;
+        LicenseDAO licenseDAO = new LicenseDAO();
+        return licenseDAO.getByDriverId(this.id);
     }
 
     public void setLicense(License license) {

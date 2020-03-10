@@ -1,9 +1,10 @@
 package com.solvd.uber.jaxb;
 
+import com.solvd.uber.daos.mysql.DriverDAO;
+import com.solvd.uber.models.Driver;
 import org.apache.log4j.Logger;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
+import javax.xml.bind.*;
 import java.io.File;
 
 public class Jaxb {
@@ -12,20 +13,32 @@ public class Jaxb {
 
     public static void main(String[] args) throws JAXBException {
 
-        JAXBContext context = JAXBContext.newInstance(JaxbDrivers.class);
+        DriverDAO driverDAO = new DriverDAO();
+        Driver driverOut = driverDAO.get(1L);
+        try {
+            JAXBContext context = JAXBContext.newInstance(Driver.class);
 
-        JaxbDrivers drivers = (JaxbDrivers) context.createUnmarshaller().unmarshal(new File("src/main/resources/drivers.xml"));
+            Marshaller marshaller = context.createMarshaller();
 
-        for (JaxbDriver driver : drivers.getDrivers()) {
-            LOGGER.info("id: " + driver.getId());
-            LOGGER.info("name: " + driver.getName());
-            LOGGER.info("password: " + driver.getPassword());
-            LOGGER.info("birthDate: " + driver.getBirthDate());
-            LOGGER.info("phoneNumber: " + driver.getPhoneNumber());
-            LOGGER.info("rate: " + driver.getRate());
-            LOGGER.info("licenseId: " + driver.getLicense().getId());
-            LOGGER.info("licenseNumber: " + driver.getLicense().getNumber());
-            LOGGER.info("licenseExpDate: " + driver.getLicense().getExpDate());
+            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+
+            File file = new File("src\\main\\resources\\jaxbOut.xml");
+
+            marshaller.marshal(driverOut, file);
+        } catch (JAXBException e) {
+            LOGGER.error(e);
+        }
+
+        File fileIn = new File("src\\main\\resources\\jaxbIn.xml");
+
+        try {
+            JAXBContext context = JAXBContext.newInstance(Driver.class);
+            Unmarshaller unmarshaller = context.createUnmarshaller();
+            Driver driverIn = (Driver) unmarshaller.unmarshal(fileIn);
+            LOGGER.info(driverIn.getName());
+            LOGGER.info(driverIn.getBirthDate());
+        } catch (JAXBException e) {
+            LOGGER.error(e);
         }
     }
 }

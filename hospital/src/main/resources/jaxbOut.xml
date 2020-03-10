@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<driver id="1">
+    <name>Facundo</name>
+    <password>asd123</password>
+    <birthDate>1998-03-13</birthDate>
+    <phoneNumber>123456</phoneNumber>
+    <rate>5</rate>
+</driver>

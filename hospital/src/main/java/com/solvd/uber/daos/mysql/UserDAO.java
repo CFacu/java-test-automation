@@ -9,7 +9,9 @@ import org.apache.log4j.Logger;
 import java.io.File;
 import java.io.IOException;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class UserDAO implements IUserDAO {
@@ -76,12 +78,12 @@ public class UserDAO implements IUserDAO {
     }
 
     @Override
-    public Set<User> getAll() {
+    public List<User> getAll() {
         Connection connection = ConnectionPool.getInstance().getConnection();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(GET_USERS);
             ResultSet resultSet = preparedStatement.executeQuery();
-            Set<User> users = new HashSet<User>();
+            List<User> users = new ArrayList<>();
 
             while (resultSet.next()) {
                 User user = extractUserFromResultSet(resultSet);
